@@ -1,4 +1,4 @@
-package br.com.ayrtonguttier.biblioteca.catalogo;
+package br.com.ayrtonguttier.biblioteca.catalogo.livro;
 
 public class Livro{
     private String titulo;
