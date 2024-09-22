@@ -14,9 +14,10 @@
             <version>42.7.4</version>
         </dependency>
     </dependencies>
-
+    <!-- dependencias no scope de build apenas -->
     <build>
         <plugins>
+            <!-- essa joça serve para configurar o jar de saída -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -25,11 +26,37 @@
                     <archive>
                         <manifest>
                             <mainClass>br.com.ayrtonguttier.biblioteca.Program</mainClass>
+                            <!-- importante, adiciona as dependencias ao classPath -->
+                            <addClasspath>true</addClasspath>
+                            <!-- define um prefixo para o classpath das dependências -->
+                            <classpathPrefix>lib</classpathPrefix>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+
+            <!-- essa joça faz a cópia das dependências para o diretório root/lib --> 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.8.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
