@@ -1,4 +1,9 @@
+name: biblioteca
+
 services:
+  application:
+    build:
+      dockerfile: docker/application/Dockerfile
   db:
     build:
       context: docker/database
