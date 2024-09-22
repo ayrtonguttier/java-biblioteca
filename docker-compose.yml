@@ -1,0 +1,29 @@
+services:
+  db:
+    build:
+      context: docker/database
+
+    environment:
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: senha
+      POSTGRES_DB: biblioteca
+
+    volumes:
+      - data:/var/lib/postgresql/data
+    networks:
+      - main
+
+  panel:
+    image: adminer
+    ports:
+      - 9000:8080
+    depends_on:
+      - db
+    networks:
+      - main
+
+volumes:
+  data:
+
+networks:
+  main:
