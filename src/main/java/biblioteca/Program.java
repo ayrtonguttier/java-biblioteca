@@ -13,8 +13,8 @@ public class Program{
 
             Repository r = new Repository();
 
-            r.deleteByTitulo("Harry Potter");
-            r.add(new Livro(0, "Harry Potter"));
+            r.deleteByTitulo("The GodFather");
+            r.add(new Livro(0, "The Godfather"));
 
             ArrayList<Livro> livros = r.getAll();
             for(Livro l : livros){
@@ -32,7 +32,6 @@ public class Program{
                     default:
                         n = l;
                 }
-
 
                 r.update(n);
                 n.write(System.out);
